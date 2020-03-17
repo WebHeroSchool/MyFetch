@@ -14,6 +14,7 @@ let name = getUserName(url);
 fetch(`https://api.github.com/users/${name}`)
   .then(response => response.json())
   .then(json => {
+      if (name) { 
             let getImage = () => {
             let photo = document.querySelector('.photo');
             photo.src = json.avatar_url;
@@ -36,5 +37,8 @@ fetch(`https://api.github.com/users/${name}`)
             getName();
             getInfo();
   
-            })
+            }
+       else {
+         alert('Пользователь не найден');
+       }})
     .catch(err => alert(err + 'Информация о пользователе не доступна'));
