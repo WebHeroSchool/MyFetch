@@ -3,7 +3,7 @@ let url = window.location.toString();
 let getUserName = (url) => {
     let arrayUrl = url.split('=');
     let userName = arrayUrl[1];
-    if (userName  == undefined) {
+    if (userName == undefined) {
         userName = 'Costyanica';
     }
     return userName;
@@ -14,6 +14,7 @@ let name = getUserName(url);
 fetch(`https://api.github.com/users/${name}`)
   .then(response => response.json())
   .then(json => {
+      let name = json.login;
       if (name) { 
             let getImage = () => {
             let photo = document.querySelector('.photo');
