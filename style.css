@@ -15,70 +15,52 @@
   color: crimson;
 }
 
-$color-1: #E8DDB5; 
-$color-2: #E8DDB5;
-$color-3: #E8DDB5;
-$color-4: #B2C9AB;
-$color-5: #B2C9AB;
-$color-6: #B2C9AB;
-$color-7: #92B6B1;
-$color-8: #92B6B1;
-$color-9: #92B6B1;
+/*.hidden {
+  display: none;
+}*/
 
-
-$color: $color-1, $color-2, $color-3, $color-4, $color-5, $color-6, $color-7, $color-8, $color-9;
-  
-@mixin anim($i){
-  $deg: ($i + 1) * 125;
- 
-  @keyframes right-#{$i} {
-    10% {
-     transform: rotate(#{$deg}deg) translate(0, 0px);
-    }
-    50%, 65% {
-      transform: rotate(#{$deg}deg) translateX(-100px);
-    }
-    
-    100% {
-      transform: rotate(#{$deg}deg) translate(0, 0px);
-    }
+@keyframes preloader {
+  0% {
+    top: 96px;
+    left: 96px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 18px;
+    left: 18px;
+    width: 156px;
+    height: 156px;
+    opacity: 0;
   }
 }
 
-body {
-  overflow: hidden;
+.preloader div {
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  animation: preloader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+.preloader div:nth-child(1) {
+  border-color: #e90c59;
 }
 
-@for $i from 1 through 9 {
-   $deg: $i * 36;
-  .item-#{$i} {
-    @include anim($i);
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    animation: right-#{$i} 4s infinite cubic-bezier(0, 0, 0.49, 1.02);
-    animation-delay: 100ms * $i;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    > * {
-    width: 20px;
-    height: 20px;
-    background: #F583A1;
-    border-radius: 50%;
-    background-color: nth($color, $i);
-    }
-  } 
+.preloader div:nth-child(2) {
+  border-color: #46dff0;
+  animation-delay: -0.5s;
 }
 
-.hidden {
-  display: none;
+
+.preloader {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+  box-sizing: content-box;
 }
