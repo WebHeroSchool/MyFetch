@@ -9,10 +9,21 @@ let getUserName = (url) => {
     return userName;
 }
 
+let getNowDate = new Promise((resolve, reject) => {
+  let time = new Date();
+  setTimeout(() => time ? resolve(time) : reject ('Время неустановлено'). 3000)
+});
+
 let name = getUserName(url);
 
-fetch(`https://api.github.com/users/${name}`)
-  .then(response => response.json())
+let getUserData = fetch(`https://api.github.com/users/${name}`)
+
+Promise.all([getUserData, getNowDate])
+  .then([resUserData, resNowDate]) => {
+      userData = resUserData;
+      nowTime = resNowDate;
+  }
+  .then(response => userData.json())
   .then(json => {
       let name = json.login;
       if (name) { 
@@ -33,10 +44,19 @@ fetch(`https://api.github.com/users/${name}`)
             let info = document.querySelector('.info');
             info.innerHTML = json.bio;
             }
+
+	    let getDate = () => {
+            let newDate = document.createElement('p');
+	    newDate.innerHTML = nowTime;
+            document.body.appendChild(nowTime);
+
+            let elementForPreloader = document.getElementById('preload');
+            elementForPreloader.classList.add('hidden');
           
             getImage();
             getName();
             getInfo();
+            getDate();
   
             }
        else {
