@@ -45,9 +45,9 @@ Promise.all([getUserData, getNowDate])
             info.innerHTML = json.bio;
             }
 
-	        let getDate = () => {
+	    let getDate = () => {
             let newDate = document.createElement('p');
-	        newDate.innerHTML = nowTime;
+	    newDate.innerHTML = nowTime;
             document.body.append(nowTime);
             }
 
